@@ -1,6 +1,13 @@
 // assign#7 multicast
 // 2020112757 Yujin Kim
 
+// Multicast 데이터 수신: recv_sock (SO_REUSEADDR 적용)
+// Multicast 데이터 전송: send_sock (IP_MULTICAST_TTL=1 설정)
+// fork()를 이용한 멀티프로세스 생성.
+// 자식 프로세스: 데이터 수신
+// 부모 프로세스: 데이터 전송
+// $ hw7 <멀티캐스트주소> <포트번호> <이름>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -33,7 +40,7 @@ int main(int argc, char *argv[])
     chat send, recv;
 
 	if(argc != 4) 
-    {
+    	{
 		printf("Usage: %s <GroupIP> <Port> <Name>\n", argv[0]);
 		exit(1);
 	}
