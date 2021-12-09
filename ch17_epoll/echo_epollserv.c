@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 	close(epfd);
 	return 0;
 }
-s
+
 void error_handling(char *buf)
 {
 	fputs(buf, stderr);

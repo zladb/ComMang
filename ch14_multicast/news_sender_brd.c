@@ -1,3 +1,6 @@
+
+// 같은 ip 네트워크에 접속한 host에게 전송
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
