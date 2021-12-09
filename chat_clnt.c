@@ -5,13 +5,6 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <pthread.h>
-
-<<<<<<< HEAD
-// what the fuck is it going well? ㅇㄹㅇㄴㄹㅇㄹㄴㅇㄹㅇ
-//왜 그러시는 거에요?!!?!?
-=======
-// what the fuck 됩니까?? 제바라!!!
->>>>>>> 5aba185437cf37b5c488d2f57c6bb23901361de9
 	
 #define BUF_SIZE 100
 #define NAME_SIZE 20
