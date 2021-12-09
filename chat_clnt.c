@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <pthread.h>
 
-// what the fuck
+// what the fuck 됩니까?? 제바라!!!
 	
 #define BUF_SIZE 100
 #define NAME_SIZE 20
