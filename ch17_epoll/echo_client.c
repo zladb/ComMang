@@ -36,13 +36,18 @@ int main(int argc, char *argv[])
 	
 	while(1) 
 	{
+		// 메세지 입력
 		fputs("Input message(Q to quit): ", stdout);
 		fgets(message, BUF_SIZE, stdin);
 		
+		// q 입력시 종료
 		if(!strcmp(message,"q\n") || !strcmp(message,"Q\n"))
 			break;
 
+		// 메세지 서버로 전송
 		write(sock, message, strlen(message));
+
+		// 에코된 메세지 읽기
 		str_len=read(sock, message, BUF_SIZE-1);
 		message[str_len]=0;
 		printf("Message from server: %s", message);

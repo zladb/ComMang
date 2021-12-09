@@ -10,7 +10,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <pthread.h>
-#include <semaphore.h>
 
 #define BUF_SIZE 100
 #define MAX_CLNT 256
@@ -38,14 +37,10 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-    // 파일을 엽니다. 읽고 추가쓰기 모드
-    if((fp = fopen("chat.txt", "w")) == NULL)
+    // 파일을 엽니다. 
+    if((fp = fopen("squidgame.txt", "rb")) == NULL)
         error_handling("fopen() error");
-    fclose(fp);
 
-    if((fp = fopen("chat.txt", "a+")) == NULL)
-        error_handling("fopen() error");
-  
     // 뮤텍스 초기화
 	pthread_mutex_init(&mutx, NULL);
     pthread_mutex_init(&file_mutx, NULL);
@@ -82,10 +77,11 @@ int main(int argc, char *argv[])
 
         // // 파일에 저장된 기존 채팅내용 전송
         // pthread_mutex_lock(&file_mutx);
+		// sleep(1);
         // while(!feof(fp))
         // {
-        //     int read_cnt = fread(buf, 1, BUF_SIZE, fp);
-		// 	printf("%s\n", buf);
+        //     fgets(buf, BUF_SIZE, fp);
+		// 	printf("%s", buf);
         //     write(clnt_sock, buf, sizeof(buf));
         // }
         // pthread_mutex_unlock(&file_mutx);

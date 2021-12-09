@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 	int str_len, i;
 	char buf[BUF_SIZE];
 
+	// epoll 이벤트 변수 생성
 	struct epoll_event *ep_events;
 	struct epoll_event event;
 	int epfd, event_cnt;
@@ -41,9 +42,12 @@ int main(int argc, char *argv[])
 	if(listen(serv_sock, 5)==-1)
 		error_handling("listen() error");
 
+	// epoll 파일 디스크립터 저장소 생성
 	epfd=epoll_create(EPOLL_SIZE);
+	// 이벤트 목록 메모리 할당
 	ep_events=malloc(sizeof(struct epoll_event)*EPOLL_SIZE);
 
+	// 트리거 사용을 위한 넌블록킹모드 설정
 	setnonblockingmode(serv_sock);
 	event.events=EPOLLIN;
 	event.data.fd=serv_sock;	
@@ -51,6 +55,7 @@ int main(int argc, char *argv[])
 
 	while(1)
 	{
+		// 이벤트 감지 
 		event_cnt=epoll_wait(epfd, ep_events, EPOLL_SIZE, -1);
 		if(event_cnt==-1)
 		{
@@ -61,18 +66,22 @@ int main(int argc, char *argv[])
 		puts("return epoll_wait");
 		for(i=0; i<event_cnt; i++)
 		{
+			// 서버 소켓에 변화 감지 -> accept 요청
 			if(ep_events[i].data.fd==serv_sock)
 			{
 				adr_sz=sizeof(clnt_adr);
 				clnt_sock=accept(serv_sock, (struct sockaddr*)&clnt_adr, &adr_sz);
+				// 클라이언트 소켓 넌블락킹, 트리거 사용
 				setnonblockingmode(clnt_sock);
 				event.events=EPOLLIN|EPOLLET;
 				event.data.fd=clnt_sock;
+				// 관찰 소켓과 해당 이벤트 추가
 				epoll_ctl(epfd, EPOLL_CTL_ADD, clnt_sock, &event);
 				printf("connected client: %d \n", clnt_sock);
 			}
 			else
 			{
+					// 데이터를 다 읽을 때까지 계속 반복
 					while(1)
 					{
 						str_len=read(ep_events[i].data.fd, buf, BUF_SIZE);
@@ -83,9 +92,9 @@ int main(int argc, char *argv[])
 							printf("closed client: %d \n", ep_events[i].data.fd);
 							break;
 						}
-						else if(str_len<0)
+						else if(str_len<0)	// 데이터가 없을 경우
 						{
-							if(errno==EAGAIN)
+							if(errno==EAGAIN) // 버퍼가 비어있음.
 								break;
 						}
 						else
@@ -106,6 +115,7 @@ void setnonblockingmode(int fd)
 	int flag=fcntl(fd, F_GETFL, 0);
 	fcntl(fd, F_SETFL, flag|O_NONBLOCK);
 }
+
 void error_handling(char *buf)
 {
 	fputs(buf, stderr);

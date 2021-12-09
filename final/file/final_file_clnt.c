@@ -10,7 +10,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <pthread.h>
-#include <semaphore.h>
 
 #define BUF_SIZE 100
 #define NAME_SIZE 20
@@ -21,8 +20,6 @@ void error_handling(char * msg);
 	
 char name[NAME_SIZE]="[DEFAULT]";
 char msg[BUF_SIZE];
-static sem_t sem_one;
-static sem_t sem_two;
 	
 int main(int argc, char *argv[])
 {
