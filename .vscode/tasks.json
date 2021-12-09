@@ -1,0 +1,70 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc 활성 파일 빌드",
+			"command": "/usr/bin/gcc",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "컴파일러: /usr/bin/gcc"
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc 활성 파일 빌드",
+			"command": "/usr/bin/gcc",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "컴파일러: /usr/bin/gcc"
+		},
+		{
+			"type": "cppbuild",
+			"label": "thread compile",
+			"command": "/usr/bin/gcc",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-D_REENTRANT",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-lpthread"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "-D_REENTRANT, -lpthread"
+		}
+	]
+}
