@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <pthread.h>
 
-// 제발 되어라..
+// 제발 되어라.. 푸시까진 성공..
 
 #define BUF_SIZE 100
 #define MAX_CLNT 256
