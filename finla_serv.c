@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 		printf("Usage : %s <port>\n", argv[0]);
 		exit(1);
 	}
-  
+	
 	pthread_mutex_init(&mutx, NULL);
 	serv_sock=socket(PF_INET, SOCK_STREAM, 0);
 
