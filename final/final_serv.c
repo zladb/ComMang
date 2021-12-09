@@ -84,8 +84,8 @@ int main(int argc, char *argv[])
         // pthread_mutex_lock(&file_mutx);
         // while(!feof(fp))
         // {
-        //     int read_cnt = fread(buf, 1, BUF_SIZE, fp);
-		// 	printf("%s\n", buf);
+        //     int read_cnt = fread(buf, BUF_SIZE, 1, fp);
+		// 		printf("%s\n", buf);
         //     write(clnt_sock, buf, sizeof(buf));
         // }
         // pthread_mutex_unlock(&file_mutx);
