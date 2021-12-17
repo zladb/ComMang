@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <unistd.h>  
 
 #define BUF_SIZE 2048
 void error_handling(char* message);
